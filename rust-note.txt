@@ -1,0 +1,17 @@
+RUST
+
+https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
+
+DEFINITIONS
+crate : packages of codes
+Cargo.lock : keeps track of exact versions of dependencies in project
+
+
+CARGO INSTRUCTION
+- cargo new hello_cargo
+- cargo build : compile -> build exe
+  - --release : compile with optimizations
+    - create exe in 'target/release', not 'target/debug'
+    - use for benchmarking running time
+- cargo check : compiles, don't build exe
+- cargo run : build and run
