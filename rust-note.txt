@@ -2,10 +2,70 @@ RUST
 
 https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
 
-DEFINITIONS
-crate : packages of codes
-Cargo.lock : keeps track of exact versions of dependencies in project
+RUST IS
+- expression-based language
+  - statement : perform action and 'do not' return a value
+    - statement cannot be assigned to a variable
+    - (ex) let x = (let y = 6)
+    - (ex) x = y = 6
+    - statement don't evaluate to a value, which is expressed by '()', an empty tuple
+  - expression : evaluate to a resulting value
+    - function / macro is an expression
+    - expressions do not include ending semicolons
+- needs to know at compile time what 'type' a variable is
+  - 'if' and 'else' block cannot have different type
 
+RUST HAS
+- strong, static type system
+  - type must be known at compile time
+  - four primary : integer, floating point, boolean, characters
+- immutable variables as default
+  - safety, easy concurrency
+- snake_case as conventional style for 'function' and 'variable' names
+- three kinds of loops
+  - 'loop' : execute until explicitly told to stop with 'break'
+    - use of 'loop' is to retry an operation you know might fail, 
+      such as checking whethere a thread has completed its job
+    - you can return a value when you 'break'
+  - 'while' : evaluate condition within a loop
+  - 'for' : execute some code for each item in a collection
+    - less error prone
+    - more efficient, there isn't checking condition for each loop
+    - most commonly used loop construct in Rust
+
+DEFINITIONS
+- crate : packages of codes
+- Cargo.lock : keeps track of exact versions of dependencies in project
+  - created first time you ran 'cargo build'
+  - when you build in future, Cargo will see 'Cargo.lock'
+- Crates.io : where people in Rust ecosystem post their open source Rust projects
+- trait: there are multiple traits in a crate (ex. rand::Rng, rand:Rand)
+- shadowing : allows you to reuse a variable
+  - creating a brand-new variable
+  - use 'let' keyword again
+  - different from 'mut' variables
+    - has to use 'let' keyword
+    - can change the type of value
+- constants
+  - use 'const' keyword
+  - must be annotated
+  - can be declared at any scope, including global
+  - are valid for the entire time a program runs
+  - may be set only to a contant expression (not result of a function call, or values computed at runtime)
+- tuples
+  - fixed length, cannot shrink or grow
+- array
+  - every element must have same type
+  - has fixed length
+  - helpful allocating data on stack (rather than heap)
+    - array is single chuck of memory allocated on the stack.
+- vector
+  - allowed to grow or shrink
+- function
+  - doesn't matter where to define a function
+  - parameter's 'type' must be declared
+  - return value of the final expression(no semicolon) in the block of the body
+    - you can return early by using 'return' keyword
 
 CARGO INSTRUCTION
 - cargo new hello_cargo
@@ -15,3 +75,10 @@ CARGO INSTRUCTION
     - use for benchmarking running time
 - cargo check : compiles, don't build exe
 - cargo run : build and run
+- cargo update : ignore 'Cargo.lock' and figure out latest ver specified in 'Cargo.toml'
+- cargo doc --open : build doc provided by all your dependencies and open a browser
+
+TROUBLESHOOT
+[1] Cargo.toml -> [dependencies] -> rand = "0.3.14" -> cargo build 실행시 에러.
+- cmd 를 사용할 것
+- setx CARGO_HTTP_CHECK_REVOKE "false" 해볼 것
