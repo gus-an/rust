@@ -32,6 +32,10 @@ RUST HAS
     - less error prone
     - more efficient, there isn't checking condition for each loop
     - most commonly used loop construct in Rust
+- prevention for data races
+  - very restricted allows for mutation
+  - no two or more pointers access same data at same time
+
 
 DEFINITIONS
 - crate : packages of codes
@@ -66,6 +70,53 @@ DEFINITIONS
   - parameter's 'type' must be declared
   - return value of the final expression(no semicolon) in the block of the body
     - you can return early by using 'return' keyword
+- ownership
+  - stack : fixed size
+    - data are close to other data
+    - when function is called, values passed to fn and fn's local variables are pushed onto stack
+    - basic types are all stored on stack, and popped off when scope is over
+  - heap : size that might change
+    - OS finds empty spot in heap that is big enough, returns pointer
+    - slower when accessing data, you have to follow a pointer
+    - data are farther away from other data
+  - ownership keeps track of what parts of code are using what data on heap,
+  - minimize duplicate data on heap, clean up unused data on heap
+  - Rules
+    - 1. Each value in Rust has a variable that's called its 'owner'
+    - 2. There can only be one owner at a time
+    - 3. When the owner goes out of 'scope', the value will be dropped
+  - Rust automatically return memory once the variable that owns it goes out of scope
+    - pair exactly one 'allocate' with one 'free'
+    - special function 'drop' is called when closing curly bracket
+  - Rust will never automatically create 'deep' copy of your data
+  - 'clone' : create deep copy of heap data
+- string literals
+  - immutable
+  - know content at compile time, text is hardcoded into executable
+  - fast and efficient
+  - copy makes duplication on stack
+- String
+  - able to store an amont of text that is unknown at compile time
+  - allocate an amount of memory on the heap
+    - memory must be requested from os at runtime (String::from)
+    - need a way of returning this memory to os when done with it
+  - 'move' : copy only copies pointer to memory, and invalidates original one
+    - prevents 'double free error'
+- 'copy' trait
+  - 'copy' traits are stored on the stack
+  - if a type has 'copy' trait, an older variable is still usable after assignment
+  - all basic types are 'copy'
+  - tuple of basic types are 'copy'
+  - any type with 'drop' trait cannot be annotated as 'copy' trait 
+- references
+  - & ampersands : refer to some value without taking ownership of it
+  - compiler guarantees references will never be dangling
+- dereference
+  - * asterisk
+- borrowing
+  - having references as function parameters
+  - cannot modify something's we're borrowing
+
 
 CARGO INSTRUCTION
 - cargo new hello_cargo
