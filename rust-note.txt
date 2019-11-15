@@ -111,6 +111,7 @@ DEFINITIONS
 - references
   - & ampersands : refer to some value without taking ownership of it
   - compiler guarantees references will never be dangling
+    - will ensure that data will not go out of scope before the reference to it does
 - dereference
   - * asterisk
 - borrowing
