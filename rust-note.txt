@@ -14,6 +14,8 @@ RUST IS
     - expressions do not include ending semicolons
 - needs to know at compile time what 'type' a variable is
   - 'if' and 'else' block cannot have different type
+- gives you control over your memory usage, having the owner of data
+  automatically clean up that data when the owner goes out of scope
 
 RUST HAS
 - strong, static type system
@@ -25,7 +27,7 @@ RUST HAS
 - three kinds of loops
   - 'loop' : execute until explicitly told to stop with 'break'
     - use of 'loop' is to retry an operation you know might fail, 
-      such as checking whethere a thread has completed its job
+      such as checking whether a thread has completed its job
     - you can return a value when you 'break'
   - 'while' : evaluate condition within a loop
   - 'for' : execute some code for each item in a collection
@@ -95,6 +97,9 @@ DEFINITIONS
   - know content at compile time, text is hardcoded into executable
   - fast and efficient
   - copy makes duplication on stack
+  - let s = "hello world!"
+    - type of 's' is '&str' : a slice pointing to specific point of binary
+    - this is immutable reference -> reason why string literals are immutable
 - String
   - able to store an amont of text that is unknown at compile time
   - allocate an amount of memory on the heap
@@ -117,9 +122,16 @@ DEFINITIONS
 - borrowing
   - having references as function parameters
   - cannot modify something's we're borrowing
+- slice
+  - does not have ownership
+  - reference a contiguous sequence of elements in a collection rather the whole
+  - internally, slice stores starting position, and length of the slice
+  - helps to find error at compile time
+- struct
+  - custom data type that lets you name and package together multiple related values
+  - more flexible than tuple, don't rely on order of data
 
-
-CARGO INSTRUCTION
+CARG INSTRUCTION
 - cargo new hello_cargo
 - cargo build : compile -> build exe
   - --release : compile with optimizations
@@ -131,6 +143,6 @@ CARGO INSTRUCTION
 - cargo doc --open : build doc provided by all your dependencies and open a browser
 
 TROUBLESHOOT
-[1] Cargo.toml -> [dependencies] -> rand = "0.3.14" -> cargo build ½ÇÇà½Ã ¿¡·¯.
-- cmd ¸¦ »ç¿ëÇÒ °Í
-- setx CARGO_HTTP_CHECK_REVOKE "false" ÇØº¼ °Í
+[1] Cargo.toml -> [dependencies] -> rand = "0.3.14" -> cargo build ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+- cmd ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+- setx CARGO_HTTP_CHECK_REVOKE "false" ï¿½Øºï¿½ ï¿½ï¿½
