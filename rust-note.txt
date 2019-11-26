@@ -37,6 +37,11 @@ RUST HAS
 - prevention for data races
   - very restricted allows for mutation
   - no two or more pointers access same data at same time
+- automatic referencing and dereferencing
+  - when you call a method 'object.something()', Rust automatically adds in 
+    '&', '&mut', or '*' so 'object' matches the signature of the method.
+  - (ex) p1.distance(&p2);
+  -      (&p1).distnace(&p2); are same
 
 
 DEFINITIONS
@@ -130,6 +135,20 @@ DEFINITIONS
 - struct
   - custom data type that lets you name and package together multiple related values
   - more flexible than tuple, don't rely on order of data
+  - struct is allowed to have multiple 'impl' blocks
+- tuple structs
+  - have struct name, but don't have names associated with their fields, just types
+  - useful when you want to give whole tuple a name, make it different from others
+- unit-like structs
+  - structs that don't have any fields
+  - userful when implement a trait on some type but don't have any data
+- method
+  - functions that are defined within the context of a struct (or enum or trait object)
+  - first parameter is always 'self', which represents the instance of struct the method is called on.
+- associated functions
+  - functions defined inside 'impl', whose parameter doesn't use 'self'
+  - '::' syntax is used for associated functions and namespaces created by modules
+
 
 CARG INSTRUCTION
 - cargo new hello_cargo
