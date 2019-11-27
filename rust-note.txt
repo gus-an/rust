@@ -42,6 +42,8 @@ RUST HAS
     '&', '&mut', or '*' so 'object' matches the signature of the method.
   - (ex) p1.distance(&p2);
   -      (&p1).distnace(&p2); are same
+- doesn't have 'null', but have enum that can encode the concept of value being absent or present
+  - ensures types such as 'i8' always have a value
 
 
 DEFINITIONS
@@ -140,7 +142,7 @@ DEFINITIONS
   - have struct name, but don't have names associated with their fields, just types
   - useful when you want to give whole tuple a name, make it different from others
 - unit-like structs
-  - structs that don't have any fields
+  - structs that don't have any` fields
   - userful when implement a trait on some type but don't have any data
 - method
   - functions that are defined within the context of a struct (or enum or trait object)
@@ -148,10 +150,64 @@ DEFINITIONS
 - associated functions
   - functions defined inside 'impl', whose parameter doesn't use 'self'
   - '::' syntax is used for associated functions and namespaces created by modules
+- enumeration
+  - used when we can enumerate all possible values
+- option
+  - enum defined by standard library
+  - can be somthing or nothing
+  - need to explicitly handle the case when the value is null
+    - 'match' expression
+- match
+  - matches in Ruse are exhaustive
+    - compiler comfirms that all the possible cases are handled
+  - can match any type, 'if' only matches 'bool'
 
+PROJECT MANAGEMENT
+- Packages
+  - contains multiple binary crates and optionally one library crate
+  - Cargo feature that lets you build, test, and share crates
+  - contains a 'Cargo.toml' that describes how to build crates
+  - 'src/main.rs' : crate root of binary crate with same name as the package
+  - 'src/lib.rs' : crate root of library crate with same name as the package
+  - if a package has 'src/main.rs' and 'src/lib.rs', it has 2 crates
+  - 'src/bin' : directory for multiple binary crates
+- Crates
+  - tree of modules that produces a library or executable
+  - crate root
+    - source file that Rust compiler starts from
+  - a crate will group related functionality together,
+    functionality provided by a crate is accessible through the crate's name
+  - different crates have independent namespaces
+- Modules and Use
+  - let you control the organization, scope, and privacy of paths
+  - start by 'cargo new --lib lib_name'
+  - modules can hold definitions for other items, 
+    such as 'structs', 'enums', 'contants', 'traits', 'functions'
+  - putting inside a module makes an item 'private'
+    - functions, methods, structs, enums, modules, contants are 'private' by default
+    - items in parent module can't use private items inside child modules
+    - items in child modules can use items in their ancestor modules
+  - module tree : crate's module structure
+    - module named 'crate' at the root
+  - 'pub' : makes a module, function .. public
+    - 'pub struct' : makes a struct public, but struct's fields are still private
+    - 'pub enum' : all variants are also public
+- Paths
+  - a way of naming an item, such as a struct, function, or module
+  - absolute path
+    - starts from crate root by using a crate name or a literal 'crate'
+  - relative path
+    - start from the current module and uses 'self', 'super', 
+      or an identifier in the current module
+  - both absolute and relative paths are followed by '::' + one or more identifiers
+  - 'use'
+    - idiomatic way of bringing a 
+      - 'function' into scope is to call it's parent module
+      - 'struct', 'enum', other items is to specify the full path
 
-CARG INSTRUCTION
+CARGO INSTRUCTION
 - cargo new hello_cargo
+- cargo new --lib restaurant
 - cargo build : compile -> build exe
   - --release : compile with optimizations
     - create exe in 'target/release', not 'target/debug'

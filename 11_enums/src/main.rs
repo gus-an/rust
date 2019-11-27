@@ -64,3 +64,21 @@ impl Message {
     }
 }
 // similar to 'struct', define functions in 'impl' block
+
+// ----------------- //
+enum Option<T> {
+    Some(T),
+    None, 
+}
+// concept of value being present or absent, 'null' value
+// you can use 'Some(T)', 'None' without 'Option::' prefix
+// you
+
+fn null () {
+    let some_number = Some(5);
+    let some_string = Some("a string");
+
+    let absent_number: Option<i32> = None;
+    // if you use 'None', you need to tell Rust what type of Option<T>
+}
+// they are 'enum' values
