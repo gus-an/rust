@@ -108,12 +108,14 @@ DEFINITIONS
     - type of 's' is '&str' : a slice pointing to specific point of binary
     - this is immutable reference -> reason why string literals are immutable
 - String
+  - growable, mutable, owned, UTF-8 encoded
   - able to store an amont of text that is unknown at compile time
   - allocate an amount of memory on the heap
     - memory must be requested from os at runtime (String::from)
     - need a way of returning this memory to os when done with it
   - 'move' : copy only copies pointer to memory, and invalidates original one
     - prevents 'double free error'
+  - 'OsString', 'OsStr', 'CString', 'Cstr' are in Rust library
 - 'copy' trait
   - 'copy' traits are stored on the stack
   - if a type has 'copy' trait, an older variable is still usable after assignment
@@ -161,8 +163,36 @@ DEFINITIONS
   - matches in Ruse are exhaustive
     - compiler comfirms that all the possible cases are handled
   - can match any type, 'if' only matches 'bool'
+- collections
+  - data are stored on heap : amount of data need not be known at compile time
+    - are 'dropped' when out of scope
+  - vectors
+    - allows you to store a variable number of values next to each other in memory
+    - more than one value in single data
+    - only store values of the same type
+  - string
+    - collection of characters(bytes)
+    - String type
+  - hash map
+    - allows you to associate a value with a particular key.
+    - a particular implementation of more general data structure called 'map'
 
 PROJECT MANAGEMENT
+.
+├── Cargo.lock
+├── Cargo.toml
+├── benches
+│   └── large-input.rs
+├── examples
+│   └── simple.rs
+├── src
+│   ├── bin
+│   │   └── another_executable.rs
+│   ├── lib.rs
+│   └── main.rs
+└── tests
+    └── some-integration-tests.rs
+
 - Packages
   - contains multiple binary crates and optionally one library crate
   - Cargo feature that lets you build, test, and share crates
@@ -204,6 +234,11 @@ PROJECT MANAGEMENT
     - idiomatic way of bringing a 
       - 'function' into scope is to call it's parent module
       - 'struct', 'enum', other items is to specify the full path
+  - re-exporting 
+    - use of 'pub use', bring an item into scope, let that item be brought by others too
+- Use of library
+  - std : use 'use' keyword, no need to change 'Cargo.toml'
+  - anything else : change 'Cargo.toml', and use 'use' keyword
 
 CARGO INSTRUCTION
 - cargo new hello_cargo
