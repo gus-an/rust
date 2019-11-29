@@ -116,6 +116,10 @@ DEFINITIONS
   - 'move' : copy only copies pointer to memory, and invalidates original one
     - prevents 'double free error'
   - 'OsString', 'OsStr', 'CString', 'Cstr' are in Rust library
+  - don't support indexing
+    - 'String' is wrapper over a 'Vec<u8>'
+    - not all characters are 1 byte long
+    - Rust has to count how many valid characters, so don't take O(1)
 - 'copy' trait
   - 'copy' traits are stored on the stack
   - if a type has 'copy' trait, an older variable is still usable after assignment
@@ -176,6 +180,10 @@ DEFINITIONS
   - hash map
     - allows you to associate a value with a particular key.
     - a particular implementation of more general data structure called 'map'
+    - useful when you want to look up data not by using index, but using a key
+    - need to import using 'use'
+    - has keys of type 'String' and of type 'i32'
+    - like vectors, is homogeneous (all keys are same type, values are same type)
 
 PROJECT MANAGEMENT
 .
